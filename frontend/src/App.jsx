@@ -3,11 +3,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home.jsx";
+import LoginPage from "./pages/Login.jsx";
 
 function App() {
     return (
         <>
-            <ToastContainer
+            <ToastContainer 
                 position="top-right"
                 autoClose={3500}
                 hideProgressBar={false}
@@ -22,6 +23,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/Login" element={<LoginPage />} />
             </Routes>
         </>
     );
