@@ -1,0 +1,173 @@
+import { useEffect, useState } from "react";
+import { useNavigate,Link } from "react-router-dom"
+import { JAVA_BACKEND_URL } from "../utils/config";
+import { toast } from "react-toastify";
+import "./css/Register.css";
+import axios from "axios";
+import { EyeOff,Eye } from "lucide-react";
+import buildingImage from "../assets/d1.jpg";
+
+const Register = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.classList.add("register-active");
+
+        return () => {
+            document.body.classList.remove("register-active");
+        };
+    },[]);
+
+    const [firstName,setFirstName] = useState("");
+    const [lastName,setLastName] = useState("");
+    const [email,setEmail] = useState("");
+    const [phone,setPhone] = useState("");
+    const [role,setRole] = useState("");
+    const [password,setPassword] = useState("");
+    const [confirmPassword,setConfirmPassword] = useState("");
+    const [showPassword,setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        //Check empty fields
+        if( !firstName || !lastName || !email || !phone || !role || !password || !confirmPassword){
+            toast.warn("Please fill the remaining fields");
+            return;
+        }
+
+        //Password match validation
+        if(password !== confirmPassword){
+            toast.warn("Passwords do not match");
+            return;
+        }
+
+        //Create user object
+        const userRoles = role;
+        const newUser = {firstName,lastName,email,phone,password,userRoles};
+
+        console.log(newUser);
+
+        //Save user
+        try {
+            await axios.post(`${JAVA_BACKEND_URL}/register`,newUser);
+
+            toast.success("User registered successfully! Please login in");
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+            toast.error("Error registering user: " + (
+                error.response?.data?.message || error.message || "Registration Failed"
+            ));
+        }
+
+        //Clear form
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhone("");
+        setPassword("");
+        setConfirmPassword("");
+    };
+
+    return (
+        <div className="register-wrapper">
+            <div className="register-container">
+                {/*Left Form Section*/}
+                <div className="register-form-section">
+                    <div className="brand">🏚️
+                        <span>UEstate</span>
+                    </div>
+
+                    <h1>Create an Account</h1>
+                    <p className="subtitle">Simplify your property journey. Join today!</p>
+                    
+                    <form onSubmit={handleRegister}>
+                        <div className="register-fields">
+                            {/*First Name*/}
+                            <div className="mb-3">
+                                <label>First Name</label>
+
+                                <input type="text" className="form-control" placeholder="Enter your first name"
+                                value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                            </div>
+
+                            {/*Last Name*/}
+                            <div className="mb-3">
+                                <label>Last Name</label>
+                                <input type="text" className="form-control" placeholder="Enter your last name"
+                                value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                            </div>
+
+                            {/*Email*/}
+                            <div className="mb-3 full-width">
+                                <label>Email</label>
+                                <input type="text" className="form-control" placeholder="Enter you email" value={email}
+                                onChange={(e) => setEmail(e.target.value)}/>
+                            </div>
+
+                            {/*Phone*/}
+                            <div className="mb-3">
+                                <label>Contact Number</label>
+                                <input type="text" className="form-control" placeholder="Enter your contact number"
+                                value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                            </div>
+
+                            {/*Role*/}
+                            <div className="mb-3">
+                                <label>Role</label>
+                                <select className="form-control role-select" value={role} onChange={(e) => setRole(e.target.value)}>
+                                    <option value="CUSTOMER">Customer</option>
+                                    <option value="OWNER">Property Owner</option>
+                                    <option value="ADMIN">Admin</option>
+                                </select>
+                            </div>
+
+                            {/*Password*/}
+                            <div className="mb-3">
+                                <label>Password</label>
+                                <div className="password-field">
+                                    <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Enter password"
+                                    value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                    <button type="button" className="password-toggle" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? "Hide Password" : "Show Password"} aria-pressed={showPassword}>
+                                        {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/*Confirm Password*/}
+                            <div className="mb-4">
+                                <label>Confirm Password</label>
+                                <div className="password-field">
+                                    <input type={showConfirmPassword ? "text" : "password"} className="form-control" placeholder="Retype above password" value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}/>
+                                    <button type="button" className="password-toggle" onClick={() => setShowConfirmPassword((visible) => !visible)} aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"} aria-pressed={showConfirmPassword}>
+                                        {showConfirmPassword ? <EyeOff size={19} /> : <Eye size={19}/>}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/*Register Button*/}
+                        <button type="submit" className="btn register-btn w-100">Register</button>
+                        <p className="signin-text">Already have an account?
+                            <Link to="/Login">Login In</Link>
+                        </p>
+                    </form>
+                </div>
+
+                {/*Right Image Section*/}
+                <div className="image-section">
+                    <img src={buildingImage} alt="UEstate" className="building-image"/>
+                    <div className="image-overlay">
+                        <h2>Find Your Dream Property</h2>
+                        <p>Buy, Sell and Manage Properties with confidence using our UEstateVHQ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Register;

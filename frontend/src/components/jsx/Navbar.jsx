@@ -46,7 +46,7 @@ export default function Navbar() {
 
             {/*Buttons*/}
             <div className="d-flex gap-2">
-                <button className="btn btn-primary" onCLick={registerClick}>REGISTER</button>
+                <button className="btn btn-primary" onClick={registerClick}>REGISTER</button>
                 <button className="btn btn-outline-primary" onClick={loginClick}>LOGIN</button>
             </div>
         </nav>

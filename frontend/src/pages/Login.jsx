@@ -97,7 +97,7 @@ const LoginPage = () => {
                         </form>
 
                         <div className="signup-text">Don't have an account?
-                            <Link to="/register">Register</Link>
+                            <Link to="/Register">Register</Link>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
     return (
@@ -22,8 +23,10 @@ function App() {
             />
 
             <Routes>
+                {/*Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/Login" element={<LoginPage />} />
+                <Route path="/Register" element={<Register />}/>
             </Routes>
         </>
     );

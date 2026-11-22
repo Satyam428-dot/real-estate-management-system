@@ -7,7 +7,7 @@
 .login-wrapper {
   min-height: 100vh;
   width: 100%;
-  background: #f4f7fc;
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -16,7 +16,7 @@
 
 .login-container {
   width: min(1100px, 100%);
-  background: #fff;
+  background: #0edf9da8;
   border-radius: 25px;
   overflow: hidden;
   display: flex;
@@ -55,7 +55,7 @@
   margin: auto;
   margin-bottom: 20px;
   border-radius: 50%;
-  background: #edf3ff;
+  background: #10b04a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,7 @@
 
 .subtitle {
   text-align: center;
-  color: gray;
+  color: rgb(11, 14, 220);
   margin-bottom: 30px;
 }
 
@@ -92,19 +92,19 @@
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #64748b;
+  color: #1969da;
   display: grid;
   place-items: center;
 }
 
 .password-toggle:hover,
-.password-toggle:focus-visible { background: #edf3ff; color: #2f6cff; }
+.password-toggle:focus-visible { background: #edf3ff; color: #0e51c4; }
 
-.password-toggle:focus-visible { outline: 2px solid #2f6cff; outline-offset: 1px; }
+.password-toggle:focus-visible { outline: 2px solid #1a50cf; outline-offset: 1px; }
 
 .login-btn {
-  background: #2f6cff !important;
-  color: white !important;
+  background: #0a9c58 !important;
+  color: rgb(255, 255, 255) !important;
   height: 50px;
   border-radius: 12px;
   border: none !important;
