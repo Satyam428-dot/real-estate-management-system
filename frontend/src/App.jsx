@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Agents from "./pages/Agents.jsx";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/Login" element={<LoginPage />} />
                 <Route path="/Register" element={<Register />}/>
+                <Route path="/Agents" element={<Agents />} />
             </Routes>
         </>
     );
